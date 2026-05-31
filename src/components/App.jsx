@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "../App.css";  // ← ADD THIS LINE
 import ShoppingList from "./ShoppingList";
 import Header from "./Header";
 import itemData from "../data/items";
@@ -11,10 +12,18 @@ function App() {
     setIsDarkMode((isDarkMode) => !isDarkMode);
   }
 
+  function handleItemFormSubmit(newItem) {
+    // Add new item to state using spread operator (immutable update)
+    setItems([...items, newItem]);
+  }
+
   return (
     <div className={"App " + (isDarkMode ? "dark" : "light")}>
       <Header isDarkMode={isDarkMode} onDarkModeClick={handleDarkModeClick} />
-      <ShoppingList items={items} />
+      <ShoppingList 
+        items={items} 
+        onItemFormSubmit={handleItemFormSubmit} 
+      />
     </div>
   );
 }
